@@ -1,0 +1,61 @@
+<div class="dashboard">
+    <!-- Button to trigger new product setup or edit existing product -->
+    <p-button label="Add Product" icon="pi pi-plus" (onClick)="prepareNewProduct()"></p-button>
+  
+    <!-- Multi-step form in TabView -->
+    <div *ngIf="editMode">
+      <p-tabView>
+        <!-- Step 1: Basic Product Information -->
+        <p-tabPanel header="Basic Info">
+          <div>
+            <input pInputText placeholder="Name" [(ngModel)]="currentProduct!.name" />
+            <input pInputText placeholder="Price" type="number" [(ngModel)]="currentProduct!.price" />
+            <input pInputText placeholder="Brand" [(ngModel)]="currentProduct!.brand" />
+            <p-inputTextarea rows="3" placeholder="Description" [(ngModel)]="currentProduct!.description"></p-inputTextarea>
+          </div>
+        </p-tabPanel>
+
+        <!-- Step 2: Image Upload with Drag and Drop -->
+        <p-tabPanel header="Upload Images">
+          
+          <p-fileUpload name="images[]" url="./upload" customUpload="true" (onUpload)="onUpload($event)" [multiple]="true"
+                        chooseLabel="Select Images" dragDropLabel="Drag and drop images here" [accept]="'.png,.jpg'">
+                        
+          </p-fileUpload>
+          
+        </p-tabPanel>
+
+        <!-- Step 3: Dynamic Field for Adding Multiple Tags -->
+        <p-tabPanel header="Tags">
+          <p-chips [(ngModel)]="currentProduct!.tags"></p-chips>
+        </p-tabPanel>
+      </p-tabView>
+
+      <!-- Save and Cancel Buttons -->
+      <p-button label="Save Product" icon="pi pi-check" (onClick)="saveProduct()"></p-button>
+      <p-button label="Cancel" icon="pi pi-times" (onClick)="cancelEdit()" class="p-button-secondary"></p-button>
+    </div>
+  
+    <!-- Product List Table -->
+    <p-table [value]="products">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Actions</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-product>
+        <tr>
+          <td>{{ product.id }}</td>
+          <td>{{ product.name }}</td>
+          <td>{{ product.price }}</td>
+          <td>
+            <p-button icon="pi pi-pencil" (onClick)="editProduct(product)"></p-button>
+            <p-button icon="pi pi-trash" (onClick)="deleteProduct(product.id)" class="p-button-danger"></p-button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+</div>
