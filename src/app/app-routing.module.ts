@@ -5,7 +5,8 @@ import { SecondComponent } from './components/second/second.component';
 import { AuthGuard } from './components/first/services/auth.guard';
 
 const routes: Routes = [
-  { path: '', component: FirstComponent },
+  { path: '', redirectTo: '1', pathMatch:'full' },
+  { path: '1', component: FirstComponent },
   { path: '2', component: SecondComponent, canActivate: [AuthGuard] },
   // other routes...
 ];

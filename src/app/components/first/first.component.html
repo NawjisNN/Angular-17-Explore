@@ -1,25 +1,43 @@
-<!-- Use Angular formGroup directive to bind the formGroup instance to the form -->
-<form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="space-y-6">
-    <div class="space-y-1">
-      <label for="email" class="block text-sm font-medium text-gray-700">Email address</label>
-      <div class="mt-1">
-        <!-- formControlName directive binds the input to the form control -->
-        <input id="email" type="email" formControlName="email" required class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-      </div>
+
+   
+   <div class="container-fluid vh-100" style="background-color:blanchedalmond">
+    <div class="row">
+        <div class="col-lg-3 col-md-2"></div>
+        <div class="col-lg-6 col-md-8 login-box mt-3">
+            <div class="col-lg-12 login-key">
+                <i class="fa fa-key" aria-hidden="true"></i>
+            </div>
+            <div class="col-lg-12 login-title">
+                ADMIN PANEL
+            </div>
+
+            <div class="col-lg-12 login-form">
+                <div class="col-lg-12 login-form">
+                    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+                        <div class="form-group">
+                            <label class="form-control-label">USERNAME</label>
+                            <input formControlName="email" type="text" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-control-label">PASSWORD</label>
+                            <input formControlName="password" type="password" class="form-control" i>
+                        </div>
+
+                        <div class="col-lg-12 loginbttm">
+                            <div class="col-lg-6 login-btm login-text">
+                                <!-- Error Message -->
+                            </div>
+                            <div class="col-lg-6 login-btm login-button">
+                                <button [disabled]="loginForm.invalid" type="submit" class="btn btn-outline-primary">LOGIN</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-2"></div>
+        </div>
     </div>
-  
-    <div class="space-y-1">
-      <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-      <div class="mt-1">
-        <input id="password" type="password" formControlName="password" required class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-      </div>
-    </div>
-  
-    <div>
-      <!-- Bind the click event to the onLogin method -->
-      <button type="submit" [disabled]="loginForm.invalid" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-        Sign in
-      </button>
-    </div>
-  </form>
-  
+
+
+
+
